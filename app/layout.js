@@ -1,9 +1,8 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { ClerkProvider } from '@clerk/nextjs';
+import { Outfit as OutfitFont } from 'next/font/google';  // Renamed to OutfitFont to avoid conflict
 import "./globals.css";
 
-import {Outfit} from 'next/font/google'
-
-const Outfit = Outfit({subsets:['latin']});
+const outfit = OutfitFont({ subsets: ['latin'] });  // Renamed the instance to 'outfit'
 
 export const metadata = {
   title: "Create Next App",
@@ -12,12 +11,12 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body
-        className= {Outfit.className}
-      >
-        {children}
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body className={outfit.className}>
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
